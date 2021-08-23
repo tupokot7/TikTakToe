@@ -6,21 +6,21 @@ import java.awt.event.MouseEvent;
 
 public class TicTacToe extends JComponent {
     public static final int FIELD_EMPTY = 0; //пустое поле
-    public static final int FIELD_X = 10; //поле с крестиком
-    public static final int FIELD_0 = 200; //поле с ноликом
-    int[][] field; //объявляем наш массив игрового поля
+    public static final int FIELD_X = 10;    //поле с крестиком
+    public static final int FIELD_0 = 200;   //поле с ноликом
+    int[][] field;                           //объявляем наш массив игрового поля
     boolean isXturn;
 
     public TicTacToe() {
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
-        field = new int[3][3]; //выделяем память под массив при создании компонента
+        field = new int[3][3];               //выделяем память под массив при создании компонента
         initGame();
     }
 
     public void initGame() {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
-                field[i][j] = FIELD_EMPTY; //очищаем массив, заполняя его 0
+                field[i][j] = FIELD_EMPTY;   //очищаем массив, заполняя его 0
             }
         }
         isXturn = true;
@@ -30,16 +30,16 @@ public class TicTacToe extends JComponent {
     protected void processMouseEvent(MouseEvent mouseEvent) {
         super.processMouseEvent(mouseEvent);
         if (mouseEvent.getButton() == MouseEvent.BUTTON1) { //проверяем, что нажата левая клавиша
-            int x = mouseEvent.getX(); //координата х клика
-            int y = mouseEvent.getY(); //координата у клика
+            int x = mouseEvent.getX();                      //координата х клика
+            int y = mouseEvent.getY();                      //координата у клика
             //проверяем, что выбранная ячейка пуста и туда можно сходить
             int i = 0;
             int j = 0;
             if (field[i][j] == FIELD_EMPTY) {
                 //проверка чей ход, если Х - ставим крестик, если 0 - ставим нолик
                 field[i][j] = isXturn ? FIELD_X : FIELD_0;
-                isXturn = !isXturn; //меняем флаг хода.
-                repaint(); //перерисовка компонента, это вызовет метод paintComponent()
+                isXturn = !isXturn;                         //меняем флаг хода.
+                repaint();                                  //перерисовка компонента, это вызовет метод paintComponent()
             }
         }
     }
@@ -56,14 +56,14 @@ public class TicTacToe extends JComponent {
     }
 
     void drawGrid(Graphics graphics) {
-        int w = getWidth(); //ширина игрового поля
-        int h = getHeight(); //высота игрового поля
-        int dw = w / 3; //делим ширину на 3 - получаем ширину одной ячейки
-        int dh = h / 3; // тоже, только с высотой
-        graphics.setColor(Color.BLUE); //цвет линий
-        for (int i = 1; i < 3; i++) { //i пробегает значения от 1 до 2 включительно (при 1=3) выход из цикла
-            graphics.drawLine(0, dh * i, w, dh * i); //горизонтальная линия
-            graphics.drawLine(dw * i, 0, dw * i, h); //вертикальная линия
+        int w = getWidth();                        //ширина игрового поля
+        int h = getHeight();                         //высота игрового поля
+        int dw = w / 3;                                //делим ширину на 3 - получаем ширину одной ячейки
+        int dh = h / 3;                                  // тоже, только с высотой
+        graphics.setColor(Color.BLUE);                      //цвет линий
+        for (int i = 1; i < 3; i++) {                         //i пробегает значения от 1 до 2 включительно (при 1=3) выход из цикла
+            graphics.drawLine(0, dh * i, w, dh * i);  //горизонтальная линия
+            graphics.drawLine(dw * i, 0, dw * i, h);    //вертикальная линия
         }
     }
 
